@@ -19,7 +19,7 @@ jobs:
         python-version: '3.x'
 
     - name: Run Audio Engine Script (Generate boot.wav)
-      run: python make_audio.py
+      run: python3 make_audio.py
 
     - name: Install x86 Cross-Compilers & Assembly Tools
       run: |
