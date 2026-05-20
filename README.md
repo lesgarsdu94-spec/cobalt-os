@@ -9,8 +9,8 @@ Welcome to the official repository for **NovaTech Cobalt OS**, engineered by **N
 ## 🛠️ System Specification & Lifecycle
 
 * **💿 Version Target:** `v0.01` (April 1971 Specification Phase)
-* **📅 Initial Release Date:** April 1971
-* **🍂 End of Support (EOS):** June 1998 (Legacy Archive)
+* **📅 Initial Release Date:** April 5, 1971
+* **🍂 End of Support (EOS):** April 12, 1971 (7-Day Legacy Lifecycle)
 * **🏷️ Active Codename:** `Cobalt` (Valid for builds v0.01 through v0.89)
 * **🖥️ Platform Target:** x86 (32-bit `i686-elf` architecture)
 * **🎯 Boot Loader:** Multiboot v1 Compliant (GRUB/QEMU compatible)
