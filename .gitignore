@@ -1,55 +1,35 @@
-# Prerequisites
-*.d
+# ============================================================================
+# NovaTech Cobalt OS - .gitignore configuration
+# ============================================================================
 
-# Object files
+# Prerequisites: Global C template defaults
 *.o
-*.ko
 *.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
 *.a
 *.la
 *.lo
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# OS Kernel Binaries & Final Images
+*.bin
+*.elf
+*.sys
+*.iso
+*.img
+*.flp
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+# GitHub Actions Artifacts & Cache
+.artifacts/
+build/
+dist/
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Android Emulator Log Files (QEMU / Bochs / Limbo)
+*.log
+bochsout.txt
+qemu-vga.log
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-# debug information files
-*.dwo
+# System-generated metadata (Android / macOS / Windows)
+.DS_Store
+Thumbs.db
+.directory
+.vscode/
+.idea/
