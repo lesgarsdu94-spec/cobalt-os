@@ -6,9 +6,11 @@ Welcome to the official repository for **NovaTech Cobalt OS**, engineered by **N
 
 ---
 
-## 🛠️ System Specification & Architecture
+## 🛠️ System Specification & Lifecycle
 
-* **💿 Version Target:** `v0.01` (April 1971 Specification)
+* **💿 Version Target:** `v0.01` (April 1971 Specification Phase)
+* **📅 Initial Release Date:** April 1971
+* **🍂 End of Support (EOS):** June 1998 (Legacy Archive)
 * **🏷️ Active Codename:** `Cobalt` (Valid for builds v0.01 through v0.89)
 * **🖥️ Platform Target:** x86 (32-bit `i686-elf` architecture)
 * **🎯 Boot Loader:** Multiboot v1 Compliant (GRUB/QEMU compatible)
@@ -18,7 +20,7 @@ Welcome to the official repository for **NovaTech Cobalt OS**, engineered by **N
 
 ## 📂 System File Placement & Topology
 
-Version 0.01 features a hierarchical, read-only RAM disk embedded directly inside the kernel's memory space. It maps out the exact directory layout utilized by the earliest research versions of UNIX:
+Version 0.01 features a hierarchical, read-only RAM disk embedded directly inside the kernel's memory space. It maps out the exact directory layout utilized by the April 1971 research versions of UNIX:
 
 ```text
 📂 / (Root System Directory)
