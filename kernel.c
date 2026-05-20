@@ -1,7 +1,7 @@
 /*
  * ============================================================================
  * NovaTech Cobalt OS - v0.01 (April 5, 1971 Spec)
- * Module: kernel.c (Monolithic Kernel Shell Console)
+ * Module: kernel.c (Shell Console with Application Execution)
  * ============================================================================
  */
 
@@ -44,7 +44,7 @@ void execute_command(const char* cmd, const char* arg) {
 
     if (strings_equal(cmd, "ls")) {
         if (arg[0] == '\0') {
-            print_string("Root Topology:\n", 0x0E);
+            print_string("Storage Topology:\n", 0x0E);
             for (int i = 0; i < get_file_count(); i++) {
                 print_string("  ", 0x07);
                 print_string(get_file_path(i), 0x0A);
@@ -62,7 +62,23 @@ void execute_command(const char* cmd, const char* arg) {
     } else if (strings_equal(cmd, "cat")) {
         const char* content = read_file_by_path(arg);
         if (content != 0) print_string(content, 0x0F);
-        else print_string("cat: file not found\n", 0x0C);
+        else print_string("cat: binary or description target unreadable\n", 0x0C);
+    } else {
+        // Build the simulated binary path search (/bin/appname)
+        char app_path[64] = "/bin/";
+        int p = 5;
+        for (int i = 0; cmd[i] != '\0' && p < 60; i++) {
+            app_path[p++] = cmd[i];
+        }
+        app_path[p] = '\0';
+
+        const char* app_metadata = read_file_by_path(app_path);
+        if (app_metadata != 0) {
+            print_string("Executing core binary target...", 0x0B);
+            print_string(app_metadata, 0x0F);
+        } else {
+            print_string("cobalt: command structure not recognized\n", 0x0C);
+        }
     }
 }
 
@@ -74,7 +90,9 @@ void kernel_main(void) {
     const char* boot_msg = read_file_by_path("/etc/motd");
     print_string(boot_msg, 0x0E);
 
-    execute_command("ls", "");
-    execute_command("cat", "/boot.wav");
-    execute_command("cat", "/bin/paint");
+    // Initial boot tests simulating built-in application launching
+    execute_command("ls", "/bin");
+    execute_command("paint", "");
+    execute_command("who", "");
+    execute_command("date", "");
 }
