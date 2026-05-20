@@ -1,0 +1,51 @@
+name: NovaTech Cobalt OS Build System v0.01
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_kernel:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code Tree
+      uses: actions/checkout@v4
+
+    - name: Set Up Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Run Audio Engine Script (Generate boot.wav)
+      run: python make_audio.py
+
+    - name: Install x86 Cross-Compilers & Assembly Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nasm gcc-multilib binutils
+
+    - name: Assemble Boot Sector (boot.asm)
+      run: nasm -f elf32 boot.asm -o boot.o
+
+    - name: Compile OS Branding Logic (logo.c)
+      run: gcc -m32 -c logo.c -o logo.o -ffreestanding -O2 -Wall -Wextra
+
+    - name: Compile File System Space (fs.c)
+      run: gcc -m32 -c fs.c -o fs.o -ffreestanding -O2 -Wall -Wextra
+
+    - name: Compile Monolithic Kernel Core (kernel.c)
+      run: gcc -m32 -c kernel.c -o kernel.o -ffreestanding -O2 -Wall -Wextra
+
+    - name: Link Kernel Binaries (linker.ld -> cobalt.bin)
+      run: ld -m elf_i386 -T linker.ld -o cobalt.bin boot.o logo.o fs.o kernel.o
+
+    - name: Archive Production Build & Audio Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: cobalt-system-artifacts
+        path: |
+          cobalt.bin
+          boot.wav
+          
